@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<testsuite name="HeadlessChrome 90.0.4430 (Windows 10.0.0)" package="unit" timestamp="2021-06-01T17:48:29" id="0" hostname="MSI" tests="6" errors="0" failures="4" time="0.279">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/90.0.4430.212 Safari/537.36"/>
+  </properties>
+  <testcase name="WeatherFinder Should show No Results Found when there are no results from API" time="0.092" classname=".WeatherFinder"/>
+  <testcase name="WeatherFinder Perform series of actions" time="0.035" classname=".WeatherFinder">
+    <failure type="">Error: Expected 'https://jsonmock.hackerrank.com/api/weather' to be 'https://jsonmock.hackerrank.com/api/weather?name=Oakland'.
+    at &lt;Jasmine&gt;
+    at http://localhost:9876/_karma_webpack_/src/app/weatherFinder/weatherFinder.component.spec.ts:162:29
+    at &lt;Jasmine&gt;
+    at fulfilled (http://localhost:9876/_karma_webpack_/node_modules/tslib/tslib.es6.js:71:42)
+</failure>
+  </testcase>
+  <testcase name="WeatherFinder Should search and render the data - 1" time="0.032" classname=".WeatherFinder">
+    <failure type="">Error: Expected 'https://jsonmock.hackerrank.com/api/weather' to be 'https://jsonmock.hackerrank.com/api/weather?name=Dallas'.
+    at &lt;Jasmine&gt;
+    at http://localhost:9876/_karma_webpack_/src/app/weatherFinder/weatherFinder.component.spec.ts:98:29
+    at &lt;Jasmine&gt;
+    at fulfilled (http://localhost:9876/_karma_webpack_/node_modules/tslib/tslib.es6.js:71:42)
+</failure>
+  </testcase>
+  <testcase name="WeatherFinder Should render the Initial UI correctly" time="0.016" classname=".WeatherFinder"/>
+  <testcase name="WeatherFinder Should search and render the data - 2" time="0.018" classname=".WeatherFinder">
+    <failure type="">Error: Expected 'https://jsonmock.hackerrank.com/api/weather' to be 'https://jsonmock.hackerrank.com/api/weather?name=Oakland'.
+    at &lt;Jasmine&gt;
+    at http://localhost:9876/_karma_webpack_/src/app/weatherFinder/weatherFinder.component.spec.ts:130:29
+    at &lt;Jasmine&gt;
+    at fulfilled (http://localhost:9876/_karma_webpack_/node_modules/tslib/tslib.es6.js:71:42)
+</failure>
+  </testcase>
+  <testcase name="WeatherFinderService should be created" time="0.086" classname=".WeatherFinderService">
+    <failure type="">NullInjectorError: R3InjectorError(DynamicTestModule)[WeatherFinderService -&gt; HttpClient -&gt; HttpClient]: 
+  NullInjectorError: No provider for HttpClient!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'WeatherFinderService', 'HttpClient', 'HttpClient' ] })
+    at &lt;Jasmine&gt;
+    at NullInjector.get (http://localhost:9876/_karma_webpack_/node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:915:1)
+    at R3Injector.get (http://localhost:9876/_karma_webpack_/node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:11052:1)
+    at R3Injector.get (http://localhost:9876/_karma_webpack_/node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:11052:1)
+    at injectInjectorOnly (http://localhost:9876/_karma_webpack_/node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:801:1)
+    at ɵɵinject (http://localhost:9876/_karma_webpack_/node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:805:1)
+    at Object.WeatherFinderService_Factory [as factory] (ng:///WeatherFinderService/ɵfac.js:5:48)
+    at R3Injector.hydrate (http://localhost:9876/_karma_webpack_/node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:11219:1)
+    at R3Injector.get (http://localhost:9876/_karma_webpack_/node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:11041:1)
+    at NgModuleRef$1.get (http://localhost:9876/_karma_webpack_/node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:24168:1)
+    at TestBedRender3.inject (http://localhost:9876/_karma_webpack_/node_modules/@angular/core/__ivy_ngcc__/fesm2015/testing.js:1930:1)
+</failure>
+    <failure type="">Error: Expected undefined to be truthy.
+    at &lt;Jasmine&gt;
+    at UserContext.&lt;anonymous&gt; (http://localhost:9876/_karma_webpack_/src/app/weatherFinder/weather-finder.service.spec.ts:14:21)
+    at ZoneDelegate.invoke (http://localhost:9876/_karma_webpack_/node_modules/zone.js/dist/zone-evergreen.js:364:1)
+    at ProxyZoneSpec.push../node_modules/zone.js/dist/zone-testing.js.ProxyZoneSpec.onInvoke (http://localhost:9876/_karma_webpack_/node_modules/zone.js/dist/zone-testing.js:292:1)
+</failure>
+  </testcase>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>

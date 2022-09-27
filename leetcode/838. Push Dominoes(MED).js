@@ -75,69 +75,77 @@ console.log(pushDominoes("RR.L"));
 
 
 
+/**
+ * @param {string} dominoes
+ * @return {string}
+ */
+var pushDominoes = function(dominoes) {
+  let left = [], right = [], leftIndex = 0, rightIndex = 0;
 
-// incomplete logic 
-// var pushDominoes = function(dominoes) {
-//   let lastPush = 'L', lastPushIndex = 0, i = 0;
-//   let updatedDominoes = '';
-//   console.log("inside");
+  // for right side
+  for(const element of dominoes.split("")) {
+    if (element === 'L') {
+      right.push(null);
+      rightIndex = 0;
+    } else if (element === '.') {
+      if (!rightIndex) {
+        right.push(null);
+        rightIndex = 0;
+      } else {
+        right.push(rightIndex);
+        rightIndex++;
+      }
+    } else if (element === 'R') {
+      rightIndex = 1;
+      right.push(0);
+    }
+  }
+  // console.log(right);
 
-//   while(i <= dominoes.length) {
-//     console.log(`i, arr[i]: ${i}, ${dominoes[i]}`);
-//     console.log(`lastPushIndex:${lastPushIndex}`);
-//     let newStr = '';
-//     switch(dominoes[i]) {
-//       case 'L':
-//         console.log("inside L");
-//         if(lastPush === 'L') {
-//           newStr += 'L'.repeat(i-lastPushIndex+1);
-//         } else if(lastPush === 'R') {
-//           let mid = null, range = i - lastPushIndex + 1;
+    // for left side
+    for(const element of dominoes.split("").reverse()) {
+      if (element === 'R') {
+        left.push(null);
+        leftIndex = 0;
+      } else if (element === '.') {
+        if (!leftIndex) {
+          left.push(null);
+          leftIndex = 0;
+        } else {
+          left.push(leftIndex);
+          leftIndex++;
+        }
+      } else if (element === 'L') {
+        leftIndex = 1;
+        left.push(0);
+      }
+    }
 
-//           if(range%2 === 0) {
-//             console.log("even");
-//             mid = range/2 + lastPushIndex;
-//             newStr += 'R'.repeat(range/2);
-//             newStr += 'L'.repeat(range/2);
-//           } else {
-//             console.log("odd");
-//             mid = Math.floor(range/2) + lastPushIndex;
-//             newStr += 'R'.repeat(mid - lastPushIndex);
-//             newStr += '.';
-//             newStr += 'L'.repeat(i - mid);
-//           }
-//         }
-//         console.log(`appending: ${newStr}`);
-//         updatedDominoes += newStr;
-//         lastPush = 'L';
-//         lastPushIndex = i;
-//         break; 
-//       case 'R': 
-//         console.log("inside R");
+  left = left.reverse()
+  // console.log(left);
 
-//         if(lastPush === 'R') {
-//           newStr += 'R'.repeat(i-lastPushIndex);
-//         } else if(lastPush === 'L') {
-//           newStr += '.'.repeat(i - lastPushIndex - 1);
-//         }
-//         console.log(`appending: ${newStr}`);
-//         updatedDominoes += newStr;
-//         lastPush = 'R';
-//         lastPushIndex = i;
-//         break;
-//       default:
-//         // console.log("inside R");
-//         // continue;
-//     }
-//     i++;
-//   }
-//   i--;
-//   console.log(i);
-//   if(lastPush === 'R') {
-//     updatedDominoes += 'R'.repeat(i - lastPushIndex);
-//   } else {
-//     updatedDominoes += '.'.repeat(i - lastPushIndex - 1);
-//   }
-//   console.log("outside");
-//   return updatedDominoes; 
-// };
+  let ans = [];
+  for (let i=0; i<dominoes.length; i++) {
+    if (left[i] === null && right[i] === null) {
+      dominoes[i] = '.';
+      ans.push('.');
+    } else if (left[i] === null) {
+      dominoes[i] = 'R';
+      ans.push('R');
+    } else if (right[i] === null) {
+      dominoes[i] = 'L';
+      ans.push('L');
+    } else if (right[i] === left[i]) {
+      dominoes[i] = '.';
+      ans.push('.');
+    } else if (right[i] > left[i]) {
+      dominoes[i] = 'L';
+      ans.push('L');
+    } else if (right[i] < left[i]) {
+      dominoes[i] = 'R';
+      ans.push('R');
+    }
+  }
+
+  return ans.join("");
+};

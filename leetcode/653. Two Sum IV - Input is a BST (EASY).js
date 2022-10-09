@@ -13,24 +13,15 @@
  */
 var findTarget = function(root, k) {
     const obj = {};
-    var findTargetHelper = function(root) {
-        
-        if(!root) { 
+    var helper = function(root) {
+        if (!root) 
             return false;
-        }
-
-        const comp = k - root.val;
         
-        if(obj.hasOwnProperty(comp)) {
+        if (obj.hasOwnProperty(k - root.val))
             return true;
-        } else {
+        else
             obj[root.val] = 1;
-        }
-        
-        const left = findTargetHelper(root.left);
-        const right = findTargetHelper(root.right);
-        return (left || right);
+        return helper(root.left) || helper(root.right);
     }
-    
-    return findTargetHelper(root);
+    return helper(root);
 };

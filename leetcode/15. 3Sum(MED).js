@@ -1,51 +1,41 @@
+
 /**
  * @param {number[]} nums
  * @param {number} target
  * @return {number}
  */
 
-// not the best
 var threeSum = function(nums) {
-  
-  const results = {}, ans = [];
-  nums = nums.sort((a,b) => a-b);
+  nums = nums.sort((a, b) => a-b);
+  let ans = [];
 
-  for(let i=0; i<nums.length-2; i++) {
+  for (let i = 0; i < nums.length - 2; i++) {
+    let target = -nums[i];
+    let start = i+1, end = nums.length-1;
 
-    while(i>0 && nums[i] === nums[i-1]) {
-      i++;
-      continue;
-    }
-
-    let left = i+1, right = nums.length-1;
-    while(left< right) {
-      const sum = nums[i] + nums[left] + nums[right];
-
-      if(sum === 0) {
-        const result = [nums[i], nums[left], nums[right]];
-        if(!results.hasOwnProperty(result)) {
-          ans.push(result);
-          results[result] = 1;
-        }
-        if(left+1 < right) {
-          right--;
-        } else {
-          break;
-        }
-      } else if(sum < 0) {
-        while(nums[left] === nums[left+1]) {
-          left++;
-          continue;
-        }
-        left++;
+    while (start < end) {
+      let sum = nums[start] + nums[end];
+      if (sum === target) {
+        ans.push([nums[i], nums[start], nums[end]]);
+        while (start < nums.length - 1 && nums[start] === nums[start + 1]) 
+          start++;
+        while (end > i+1 && nums[end] === nums[end - 1]) 
+          end--;
+        start++;
+        end--;
+      } else if (sum < target) {
+        while (start < nums.length - 1 && nums[start] === nums[start + 1]) 
+          start++;
+        start++;
       } else {
-        while(nums[right] === nums[right-1]) {
-          right--;
-          continue;
-        }
-        right--;
+        while (end > i+1 && nums[end] === nums[end - 1]) 
+          end--;
+        end--;
       }
     }
+
+    while (i < nums.length-2 && nums[i] === nums[i+1])
+      i++;
   }
 
   return ans;

@@ -19,7 +19,7 @@ var minPathSum = function(grid) {
     
     dp[i][j] = grid[i][j] + ans;
     return dp[i][j];
-  }
+  } 
   return helper(height-1,width-1);
 };
 

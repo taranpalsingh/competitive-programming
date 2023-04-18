@@ -4,62 +4,39 @@
  * @return {number}
  */
 var numWays = function(words, target) {
-  
-  var occurrencesObj = function(word) {
-    let obj = {};
-    word.split('').forEach((char, index) => {
-      if (!(char in obj)) {
-        obj[char] = [];
-      }
-      obj[char].push(index);
-    })
-    return obj;
-  }
 
-  let dict = {}, dp = new Array(target.length).fill().map(_ => new Array(words[0].length).fill(null));
-  const mod = Math.pow(10, 9) + 7;
+  let occ = new Array(26).fill().map(_ => new Array(words[0].length).fill(0));
+  let dp = new Array(target.length).fill().map(_ => new Array(words[0].length).fill(-1));
+  const mod = 1000000007;
+  const m = target.length;
+  const k = occ[0].length;
 
-  words.forEach(word => {
-    dict[word] = occurrencesObj(word);
+  words.forEach((word, index) => {
+    word = word.toLowerCase();
+    for (let i = 0; i < word.length; i++) {
+      const charCode = word.charCodeAt(i) - 97;
+      occ[charCode][i]++;
+    }
   })
-  // console.log(dict);
+  
+  // console.log(occ);
+  var helper = function(i, j) {
+    if (i === m) return 1;
+    if (j === k) return 0;
 
+    if (dp[i][j] != -1) return dp[i][j];
 
-  var helper = function(targetIndex, letterIndex, count, arr1, arr2) {
+    const notTaken = helper(i, j+1) % mod;
 
-    // console.log(`targetIndex: ${targetIndex}, letterIndex: ${letterIndex}`);
-    if (targetIndex > target.length - 1) {
-      // console.log(arr1);
-      // console.log(arr2);
-      return 1;
-    }
+    const taken = (occ[target.charCodeAt(i) - 97][j] * helper(i+1, j+1)) % mod;
 
-    if (letterIndex > -1 && dp[targetIndex][letterIndex] != null)  {
-      // console.log('dp used');
-      return dp[targetIndex][letterIndex];
-    }
-
-    if (letterIndex >= words[0].length - 1) return 0;
-
-    const targetChar = target[targetIndex];
-
-    for (const word of Object.keys(dict)) {
-      if (!(targetChar in dict[word])) continue;
-      
-      for (const i of dict[word][targetChar]) {
-        if (i > letterIndex) {
-          count += helper(targetIndex+1, i, 0, [...arr1, i], [...arr2, word]) % mod;
-        }
-      }
-    }
-    if (letterIndex > -1) dp[targetIndex][letterIndex] = count;
-    return count % mod;
+    dp[i][j] = (taken + notTaken) % mod
+    return dp[i][j];
   }
-
-  return helper(0, -1, 0, [], []) % mod;
+  return helper(0, 0) % mod;
 };
 
 
 console.log(numWays(["acca","bbbb","caca"], "aba"));
-console.log(numWays(["abba","baab"], "bab"));
+// console.log(numWays(["abba","baab"], "bab"));
 // console.log(numWays());
